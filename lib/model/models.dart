@@ -12,7 +12,7 @@ class WeatherDetails {
   dynamic iconCode;
   dynamic countryCode;
 
-  WeatherDetails(
+  WeatherDetails({
     this.cityName,
     this.temperature,
     this.weatherDescription,
@@ -25,5 +25,5 @@ class WeatherDetails {
     this.cloud,
     this.iconCode,
     this.countryCode,
-  );
+  });
 }

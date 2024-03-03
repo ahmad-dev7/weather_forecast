@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_forecast/components/gradient_background.dart';
 import 'package:weather_forecast/controller/animation_controller.dart';
-import 'package:weather_forecast/controller/data_controller.dart';
+import 'package:weather_forecast/controller/weather_controller.dart';
 import 'package:weather_forecast/home_page.dart';
 
 class ShowLoader extends StatelessWidget {
@@ -37,9 +37,9 @@ class ShowLoader extends StatelessWidget {
       ..duration = composition.duration
       ..forward().whenComplete(
         () {
-          if (controller.receivedData.value == true) {
+          if (controller.receivedData.value) {
             Get.offAll(
-              const HomePage(),
+              () => const HomePage(),
               transition: Transition.cupertinoDialog,
               duration: const Duration(seconds: 2),
             );

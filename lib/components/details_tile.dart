@@ -13,28 +13,33 @@ class DetailsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
-      width: MediaQuery.of(context).size.width / 2,
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: ListTile(
-          title: Text(
-            heading,
-            style: GoogleFonts.rajdhani(
-              color: Colors.white,
-              fontWeight: FontWeight.w100,
-            ),
+      height: 50,
+      child: Row(
+        children: [
+          Image.asset(imagePath, height: 35),
+          const SizedBox(width: 20),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                heading,
+                style: GoogleFonts.rajdhani(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w100,
+                ),
+              ),
+              Text(
+                info,
+                style: GoogleFonts.lato(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
+            ],
           ),
-          subtitle: Text(
-            info,
-            style: GoogleFonts.lato(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
-            ),
-          ),
-          leading: Image.asset(imagePath, height: 35),
-        ),
+        ],
       ),
     );
   }

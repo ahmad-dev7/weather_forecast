@@ -12,7 +12,7 @@ class LocationChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      backgroundColor: const Color(0xFF669EE2),
+      backgroundColor: Colors.grey.shade800,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       labelPadding: const EdgeInsetsDirectional.only(start: 4, end: 0),
       shape: const StadiumBorder(
@@ -20,7 +20,7 @@ class LocationChip extends StatelessWidget {
       ),
       elevation: 10,
       deleteIcon: const Icon(
-        Icons.pin_drop,
+        Icons.place_outlined,
         color: Colors.white,
       ),
       onDeleted: () => '',

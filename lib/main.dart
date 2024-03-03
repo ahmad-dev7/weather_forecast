@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:weather_forecast/controller/data_controller.dart';
+import 'package:weather_forecast/controller/weather_controller.dart';
 import 'package:weather_forecast/loader_screen.dart';
 
 void main() {

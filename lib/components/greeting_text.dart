@@ -20,11 +20,11 @@ class GreetingText extends StatelessWidget {
   String getGreeting() {
     DateTime dateTime = DateTime.now();
     int time = int.parse(DateFormat.H().format(dateTime));
-    if (time >= 22 || time <= 4) {
+    if (time >= 22 && time <= 4) {
       return 'Good Night';
-    } else if (time > 4 || time <= 12) {
+    } else if (time > 4 && time <= 12) {
       return 'Good Morning';
-    } else if (time > 12 || time <= 17) {
+    } else if (time > 12 && time <= 17) {
       return 'Good Afternoon';
     } else {
       return 'Good Evening';

@@ -8,23 +8,13 @@ import 'package:weather_forecast/components/greeting_text.dart';
 import 'package:weather_forecast/components/image_path_provider.dart';
 import 'package:weather_forecast/components/location_chip.dart';
 import 'package:weather_forecast/components/details_tile.dart';
-import 'package:weather_forecast/controller/data_controller.dart';
+import 'package:weather_forecast/controller/weather_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String getTime({required String sinceEpoch, bool? date}) {
-      DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-        int.parse(sinceEpoch) * 1000,
-      );
-      String formattedTime =
-          DateFormat("hh:mm a").format(dateTime).toLowerCase();
-      String formattedDate = DateFormat("EEEE d, hh:mm a").format(dateTime);
-      return date != null ? formattedDate : formattedTime;
-    }
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
@@ -36,8 +26,8 @@ class HomePage extends StatelessWidget {
             children: [
               const GreetingText(),
               LocationChip(
-                cityName: controller.cityName.value,
-                countryCode: controller.countryCode.value,
+                cityName: controller.weatherDetails.value.cityName,
+                countryCode: controller.weatherDetails.value.countryCode,
               )
             ],
           ),
@@ -61,7 +51,7 @@ class HomePage extends StatelessWidget {
                     left: 8,
                     child: Obx(
                       () => Image.asset(
-                        getImage(controller.iconCode.value),
+                        getImage(controller.weatherDetails.value.iconCode),
                         height: MediaQuery.of(context).size.width - 30,
                         color: Colors.black54,
                       ),
@@ -72,14 +62,14 @@ class HomePage extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 20),
                     child: Obx(
                       () => Image.asset(
-                        getImage(controller.iconCode.value),
+                        getImage(controller.weatherDetails.value.iconCode),
                         height: MediaQuery.of(context).size.width - 30,
                       ),
                     ),
                   ),
                   // Temperature, description, time
                   Positioned.fill(
-                    bottom: -20,
+                    bottom: -30,
                     child: Align(
                       child: Obx(
                         () => Wrap(
@@ -88,7 +78,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             // Temperature
                             Text(
-                              "${controller.temperature.value} \u2103",
+                              "${(controller.weatherDetails.value.temperature - 273.15).toStringAsFixed(0)} \u2103",
                               style: GoogleFonts.lato(
                                 shadows: [
                                   const BoxShadow(
@@ -104,7 +94,8 @@ class HomePage extends StatelessWidget {
                             ),
                             // Description
                             Text(
-                              controller.weatherDescription.value,
+                              controller
+                                  .weatherDetails.value.weatherDescription,
                               style: GoogleFonts.cinzel(
                                 color: Colors.white,
                                 letterSpacing: 1,
@@ -115,12 +106,13 @@ class HomePage extends StatelessWidget {
                             // Time
                             Text(
                               getTime(
-                                sinceEpoch: controller.dateTimeSinceEpoch.value,
+                                sinceEpoch: controller
+                                    .weatherDetails.value.dateTimeSinceEpoch,
                                 date: true,
                               ),
                               style: GoogleFonts.rajdhani(
                                 color: Colors.white70,
-                                fontWeight: FontWeight.w100,
+                                fontWeight: FontWeight.w200,
                                 fontSize: 16,
                               ),
                             ),
@@ -135,49 +127,76 @@ class HomePage extends StatelessWidget {
                     left: 0,
                     right: 0,
                     child: Obx(
-                      () => Wrap(
-                        children: [
-                          //? Sunrise and Sunset
-                          DetailsTile(
-                            heading: 'Sunrise',
-                            info: getTime(
-                              sinceEpoch:
-                                  controller.sunriseTimeSinceEpoch.value,
+                      () => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            //? Sunrise and Sunset
+                            Row(
+                              children: [
+                                DetailsTile(
+                                  heading: 'Sunrise',
+                                  info: getTime(
+                                    sinceEpoch: controller.weatherDetails.value
+                                        .sunriseTimeSinceEpoch,
+                                  ),
+                                  imagePath: 'images/sunrise.png',
+                                ),
+                                const Spacer(),
+                                DetailsTile(
+                                  heading: 'Sunset',
+                                  info: getTime(
+                                    sinceEpoch: controller.weatherDetails.value
+                                        .sunsetTimeSinceEpoch,
+                                  ),
+                                  imagePath: 'images/sunset.png',
+                                ),
+                              ],
                             ),
-                            imagePath: 'images/sunrise.png',
-                          ),
-                          DetailsTile(
-                            heading: 'Sunset',
-                            info: getTime(
-                              sinceEpoch: controller.sunsetTimeSinceEpoch.value,
+
+                            const Divider(color: Colors.white54, thickness: .3),
+
+                            //? Humidity and Pressure
+                            Row(
+                              children: [
+                                DetailsTile(
+                                  heading: 'Humidity',
+                                  info:
+                                      '${controller.weatherDetails.value.humidity} %',
+                                  imagePath: 'images/humidity.png',
+                                ),
+                                const Spacer(),
+                                DetailsTile(
+                                  heading: 'Pressure',
+                                  info:
+                                      '${controller.weatherDetails.value.pressure} hPa',
+                                  imagePath: 'images/pressure.png',
+                                ),
+                              ],
                             ),
-                            imagePath: 'images/sunset.png',
-                          ),
-                          const Divider(color: Colors.white54, thickness: .3),
-                          //? Humidity and Pressure
-                          DetailsTile(
-                            heading: 'Humidity',
-                            info: '${controller.humidity.value} %',
-                            imagePath: 'images/humidity.png',
-                          ),
-                          DetailsTile(
-                            heading: 'Pressure',
-                            info: '${controller.pressure.value} hPa',
-                            imagePath: 'images/pressure.png',
-                          ),
-                          const Divider(color: Colors.white54, thickness: .3),
-                          //? Wind speed and Cloud
-                          DetailsTile(
-                            heading: 'Wind',
-                            info: '${controller.windSpeed} km/h',
-                            imagePath: 'images/wind_speed.png',
-                          ),
-                          DetailsTile(
-                            heading: 'Clouds',
-                            info: '${controller.cloud}  %',
-                            imagePath: 'images/cloud.png',
-                          ),
-                        ],
+
+                            const Divider(color: Colors.white54, thickness: .3),
+
+                            //? Wind speed and Cloud
+                            Row(
+                              children: [
+                                DetailsTile(
+                                  heading: 'Wind',
+                                  info:
+                                      '${controller.weatherDetails.value.windSpeed} km/h',
+                                  imagePath: 'images/wind_speed.png',
+                                ),
+                                const Spacer(),
+                                DetailsTile(
+                                  heading: 'Clouds',
+                                  info:
+                                      '${controller.weatherDetails.value.cloud}  %          ',
+                                  imagePath: 'images/cloud.png',
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -188,5 +207,14 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getTime({required int sinceEpoch, bool? date}) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+      sinceEpoch * 1000,
+    );
+    String formattedTime = DateFormat("hh:mm a").format(dateTime).toLowerCase();
+    String formattedDate = DateFormat("EEEE d, hh:mm a").format(dateTime);
+    return date != null ? formattedDate : formattedTime;
   }
 }
