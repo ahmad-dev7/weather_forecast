@@ -23,11 +23,11 @@ The weather forecast app provides real-time weather information for users. Here 
 
 ### Screenshots
 
+![Weather Forecast App](screenshots/weather_app_screenshot.png)
+
 Images will be added soon
 
 <!-- Add screenshots of your apps here -->
-<!-- ![To-Do List App](todo_app_screenshot.png) -->
-<!-- ![Weather Forecast App](weather_app_screenshot.png) -->
 
 ## Contribution
 
