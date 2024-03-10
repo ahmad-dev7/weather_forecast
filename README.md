@@ -23,7 +23,7 @@ The weather forecast app provides real-time weather information for users. Here 
 
 ### Screenshots
 
-<img src= "images/working_demo/home_page.jpg" alt= "Home Page" height="200"/>
+<img src= "images/working_demo/home_page.jpg" alt= "Home Page" height="300"/>
 
 ## Contribution
 
