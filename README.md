@@ -15,7 +15,8 @@ The weather forecast app provides real-time weather information for users. Here 
 ### Screenshots
 
 <img src= "images/working_demo/home_page.jpg" alt= "Home Page" height="300"/>
-[![Watch the video](https://img.youtube.com/vi/ZAP_XHPikfc/0.jpg)](https://www.youtube.com/watch?v=ZAP_XHPikfc)
+
+https://github.com/ahmad-dev7/weather_forecast/assets/126844715/fe9dcaef-3ba5-48d6-b46b-a4c6363b16c6
 
 ## Contribution
 
