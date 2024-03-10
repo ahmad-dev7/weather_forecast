@@ -2,16 +2,7 @@
 
 ## Bharat Intern <img src="https://bharatintern.live/static/logo-1825b371a1405102814a940ea9b0c0b8.png" alt="Bharat Intern Icon" style="float:right;height:30px;">
 
-Welcome to my app development internship at Bharat-Intern! In this internship, I've developed two Flutter applications: a to-do list app and a weather forecast app.
-
-## To-Do List App
-
-The to-do list app helps users keep track of their tasks efficiently. Here are some key features:
-
-- **Task Management**: Users can add, edit, and delete tasks.
-- **Due Date and Time**: Users can set due dates and times for their tasks.
-- **Title and Description**: Users can add titles and descriptions to their tasks.
-- **Local Data Storage**: The app uses Hive as local data storage to persist tasks across sessions.
+Welcome to my app development internship at Bharat-Intern! In this internship, I've developed two Flutter applications: a to-do list app and a weather forecast app. This is the readme file of Weather Forecast app.
 
 ## Weather Forecast App
 
@@ -24,6 +15,10 @@ The weather forecast app provides real-time weather information for users. Here 
 ### Screenshots
 
 <img src= "images/working_demo/home_page.jpg" alt= "Home Page" height="300"/>
+<video width="640" height="360" controls autoplay loop muted>
+  <source src="images/working_demo/go_through_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Contribution
 
